@@ -31,6 +31,10 @@ app.get('/api/keys/google', (req, res) => {
   res.send({key: process.env.GOOGLE_API_KEY || ''});
 });
 
+app.get('/', (req, res) => {
+  res.send('Mern Ecommerce API Server Default Route');
+});
+
 app.use('/api/upload', uploadRouter);
 app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);
