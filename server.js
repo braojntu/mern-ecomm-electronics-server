@@ -8,13 +8,18 @@ import userRouter from './routes/userRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
 import uploadRouter from './routes/uploadRoutes.js';
 import cors from 'cors';
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+dotenv.config();
+app.use(cors());
+
 app.use(
   cors({
     credentials: true,
-    origin: 'https://mern-ecomm-electronics-client.netlify.app/',
+    origin: process.env.FRONT_END_CLIENT_URL,
   })
 );
-dotenv.config();
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -25,10 +30,6 @@ mongoose
     console.log(err.message);
   });
 
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
 
 app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
