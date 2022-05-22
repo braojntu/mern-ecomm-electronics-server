@@ -8,7 +8,12 @@ import userRouter from './routes/userRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
 import uploadRouter from './routes/uploadRoutes.js';
 import cors from 'cors';
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: 'https://mern-ecomm-electronics-client.netlify.app/',
+  })
+);
 dotenv.config();
 
 mongoose
